@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
-
 :root {
   /* Indigo */
   --color-brand-50: #eef2ff;
