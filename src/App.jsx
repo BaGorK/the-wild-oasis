@@ -11,11 +11,16 @@ import AppLayout from './ui/AppLayout';
 import Users from './pages/Users';
 
 import GlobalStyles from './styles/GlobalStyles';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <GlobalStyles />
+      <ReactQueryDevtools initialIsOpen='true' />
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
@@ -31,7 +36,7 @@ function App() {
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </QueryClientProvider>
   );
 }
 
