@@ -1,4 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 
 import Dashboard from './pages/Dashboard';
 import Bookings from './pages/Bookings';
@@ -11,8 +14,6 @@ import AppLayout from './ui/AppLayout';
 import Users from './pages/Users';
 
 import GlobalStyles from './styles/GlobalStyles';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,26 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyles />
+      <Toaster
+        possition='top-center'
+        gutter={12}
+        containerStyle={{ margin: '8px' }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: '16px',
+            maxWidth: '500px',
+            padding: '16px 24px',
+            backgroundColor: 'var(--color-grey-50)',
+            color: 'var(--color-grey-700)',
+          },
+        }}
+      />
       <ReactQueryDevtools initialIsOpen='true' />
       <BrowserRouter>
         <Routes>
