@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
 
 import Input from '../../ui/Input';
 import Form from '../../ui/Form';
@@ -10,8 +8,8 @@ import FileInput from '../../ui/FileInput';
 import Textarea from '../../ui/Textarea';
 import FormRow from '../../ui/FormRow';
 
-import { createEditCabin } from '../../services/apiCabins';
 import { useCreateCabin } from './useCreateCabin';
+import { useUpdateCabin } from './useUpdateCabin';
 
 function CreateCabinForm({ cabinToUpdate = {} }) {
   const { id: editId, ...editValues } = cabinToUpdate;
@@ -23,21 +21,8 @@ function CreateCabinForm({ cabinToUpdate = {} }) {
 
   const { errors } = formState;
 
-  const queryClient = useQueryClient();
   const { createCabin, isCreating } = useCreateCabin();
-
-  const { mutate: updateCabin, isLoading: isUpdating } = useMutation({
-    mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
-    onSuccess: () => {
-      toast.success('cabin successfully updated!');
-      queryClient.invalidateQueries({
-        queryKey: ['cabin'],
-      });
-      reset();
-    },
-
-    onError: (err) => toast.error(err.message),
-  });
+  const { updateCabin, isUpdating } = useUpdateCabin();
 
   const isWorking = isCreating || isUpdating;
 
