@@ -11,6 +11,7 @@ import Textarea from '../../ui/Textarea';
 import FormRow from '../../ui/FormRow';
 
 import { createEditCabin } from '../../services/apiCabins';
+import { useCreateCabin } from './useCreateCabin';
 
 function CreateCabinForm({ cabinToUpdate = {} }) {
   const { id: editId, ...editValues } = cabinToUpdate;
@@ -23,19 +24,7 @@ function CreateCabinForm({ cabinToUpdate = {} }) {
   const { errors } = formState;
 
   const queryClient = useQueryClient();
-
-  const { mutate: createCabin, isLoading: isCreating } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
-      toast.success('new cabin successfully created!');
-      queryClient.invalidateQueries({
-        queryKey: ['cabin'],
-      });
-      reset();
-    },
-
-    onError: (err) => toast.error(err.message),
-  });
+  const { createCabin, isCreating } = useCreateCabin();
 
   const { mutate: updateCabin, isLoading: isUpdating } = useMutation({
     mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
@@ -56,8 +45,25 @@ function CreateCabinForm({ cabinToUpdate = {} }) {
     const image = typeof data.image === 'string' ? data.image : data.image[0];
 
     if (isUpdateSession)
-      updateCabin({ newCabinData: { ...data, image }, id: editId });
-    else createCabin({ ...data, image });
+      updateCabin(
+        { newCabinData: { ...data, image }, id: editId },
+        {
+          // eslint-disable-next-line no-unused-vars
+          onSuccess: (data) => {
+            // console.log(data); // this function gets the data that the mutation function returns.
+            reset();
+          },
+        }
+      );
+    else
+      createCabin(
+        { ...data, image },
+        {
+          onSuccess: () => {
+            reset();
+          },
+        }
+      );
   };
 
   const submitErrorHandler = (error) => {
