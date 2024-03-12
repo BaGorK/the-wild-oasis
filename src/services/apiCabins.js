@@ -14,7 +14,6 @@ export async function getCabins() {
 // id of the cabin to be edited
 export async function createEditCabin(newCabin, id) {
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
-  console.log(newCabin);
 
   const imageName = `${Date.now()}-${newCabin.image.name}`.replaceAll('/', '');
 
