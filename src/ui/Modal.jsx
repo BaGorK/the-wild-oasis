@@ -51,11 +51,11 @@ const Button = styled.button`
   }
 `;
 
-function Modal({ children }) {
+function Modal({ children, onCloseModal }) {
   return (
-    <Overlay>
+    <Overlay onClick={() => onCloseModal?.()}>
       <StyledModal>
-        <Button>
+        <Button onClick={() => onCloseModal?.()}>
           <HiXMark />
         </Button>
         <div>{children}</div>

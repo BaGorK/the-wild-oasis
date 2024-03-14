@@ -11,7 +11,7 @@ import FormRow from '../../ui/FormRow';
 import { useCreateCabin } from './useCreateCabin';
 import { useUpdateCabin } from './useUpdateCabin';
 
-function CreateCabinForm({ cabinToUpdate = {} }) {
+function CreateCabinForm({ cabinToUpdate = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinToUpdate;
   const isUpdateSession = Boolean(editId);
 
@@ -37,6 +37,7 @@ function CreateCabinForm({ cabinToUpdate = {} }) {
           onSuccess: (data) => {
             // console.log(data); // this function gets the data that the mutation function returns.
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -46,6 +47,7 @@ function CreateCabinForm({ cabinToUpdate = {} }) {
         {
           onSuccess: () => {
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -56,7 +58,10 @@ function CreateCabinForm({ cabinToUpdate = {} }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit(submitHandler, submitErrorHandler)}>
+    <Form
+      onSubmit={handleSubmit(submitHandler, submitErrorHandler)}
+      type={onCloseModal ? 'modal' : 'regular'}
+    >
       <FormRow label='Cabin name' error={errors?.name?.message}>
         <Input
           {...register('name', {
@@ -140,7 +145,11 @@ function CreateCabinForm({ cabinToUpdate = {} }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation='secondary' type='reset'>
+        <Button
+          variation='secondary'
+          type='reset'
+          onClick={() => onCloseModal?.()}
+        >
           Cancel
         </Button>
         <Button disabled={isWorking}>
