@@ -1,4 +1,6 @@
-import styled from "styled-components";
+/* eslint-disable react/prop-types */
+import { HiXMark } from 'react-icons/hi2';
+import styled from 'styled-components';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -48,3 +50,18 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+function Modal({ children }) {
+  return (
+    <Overlay>
+      <StyledModal>
+        <Button>
+          <HiXMark />
+        </Button>
+        <div>{children}</div>
+      </StyledModal>
+    </Overlay>
+  );
+}
+
+export default Modal;
