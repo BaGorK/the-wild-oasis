@@ -6,11 +6,11 @@ function CabinTableOperations() {
   return (
     <TableOperations>
       <Filter
-        filterFieldName='discount'
+        filterField='discount'
         options={[
-          { value: 'all', lable: 'All' },
-          { value: 'no-discount', lable: 'No discount' },
-          { value: 'with-discount', lable: 'With discount' },
+          { value: 'all', label: 'All' },
+          { value: 'no-discount', label: 'No discount' },
+          { value: 'with-discount', label: 'With discount' },
         ]}
       />
       <SortBy

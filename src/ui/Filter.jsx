@@ -36,13 +36,13 @@ const FilterButton = styled.button`
   }
 `;
 
-function Filter({ filterFieldName, options }) {
+function Filter({ filterField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const currentFilter = searchParams.get(filterFieldName) || options[0].value;
+  const currentFilter = searchParams.get(filterField) || options[0].value;
 
   const handleClick = (value) => {
-    searchParams.set(filterFieldName, value);
+    searchParams.set(filterField, value);
     setSearchParams(searchParams);
   };
 
@@ -55,7 +55,7 @@ function Filter({ filterFieldName, options }) {
           active={option.value === currentFilter}
           disabled={option.value === currentFilter}
         >
-          {option.lable}
+          {option.label}
         </FilterButton>
       ))}
     </StyledFilter>
