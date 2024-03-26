@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledPagination = styled.div`
@@ -57,21 +59,54 @@ const PaginationButton = styled.button`
   }
 `;
 
-function Pagination() {
+const PAGE_COUNT = 10;
+
+function Pagination({ count }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const currentPage = !searchParams.get('page')
+    ? 1
+    : Number(searchParams.get('page'));
+
+  const pageCount = Math.ceil(count / PAGE_COUNT);
+
+  function nextPage() {
+    const next = currentPage === pageCount ? currentPage : currentPage + 1;
+
+    searchParams.set('page', next);
+    setSearchParams(searchParams);
+  }
+
+  function prevPage() {
+    const prev = currentPage === 1 ? currentPage : currentPage - 1;
+
+    searchParams.set('page', prev);
+    setSearchParams(searchParams);
+  }
+
+  if (PAGE_COUNT >= count) return null;
+
   return (
     <StyledPagination>
       <P>
-        Showing <span>1</span> to <span>10</span> of <span>23</span>
+        Showing <span>{(currentPage - 1) * PAGE_COUNT + 1}</span> to{' '}
+        <span>
+          {currentPage === pageCount ? count : PAGE_COUNT * currentPage}
+        </span>{' '}
+        of <span>{count}</span>
       </P>
 
       <Buttons>
-        <PaginationButton>
+        <PaginationButton onClick={prevPage} disabled={currentPage === 1}>
           <span>
             <HiChevronLeft />
           </span>
           Previous
         </PaginationButton>
-        <PaginationButton>
+        <PaginationButton
+          onClick={nextPage}
+          disabled={currentPage === pageCount}
+        >
           Next
           <span>
             <HiChevronRight />
