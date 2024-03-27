@@ -4,7 +4,7 @@ import supabase from './supabase';
 export async function getBookings({ filter, sortBy }) {
   let query = supabase
     .from('bookings')
-    .select('*, cabins(name), guests(fullName, email)');
+    .select('*, cabins(name), guests(fullName, email)', { count: 'exact' });
 
   // FILTER
   if (filter) {
@@ -18,14 +18,14 @@ export async function getBookings({ filter, sortBy }) {
     });
   }
 
-  const { data, error } = await query;
+  const { data, error, count } = await query;
 
   if (error) {
     console.error(error);
     throw new Error('Bookings could not be loaded');
   }
 
-  return data;
+  return { data, count };
 }
 
 export async function getBooking(id) {
