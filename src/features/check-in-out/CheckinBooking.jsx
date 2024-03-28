@@ -54,7 +54,18 @@ function CheckinBooking() {
   function handleCheckin() {
     if (!confirmPaid) return;
 
-    checkin(bookingId);
+    if (addBreakfast) {
+      checkin({
+        bookingId,
+        breakfast: {
+          hasBreakfast: true,
+          extrasPrice: optionalBreakfastPrice,
+          totalPrice: totalPrice + optionalBreakfastPrice,
+        },
+      });
+    } else {
+      checkin({ bookingId, breakfast: {} });
+    }
   }
 
   return (
@@ -100,10 +111,7 @@ function CheckinBooking() {
       </Box>
 
       <ButtonGroup>
-        <Button
-          onClick={handleCheckin}
-          disabled={!confirmPaid || isCheckingIn || isPaid}
-        >
+        <Button onClick={handleCheckin} disabled={!confirmPaid || isCheckingIn}>
           Check in booking #{bookingId}
         </Button>
         <Button variation='secondary' onClick={moveBack}>
