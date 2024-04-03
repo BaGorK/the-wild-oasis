@@ -44,7 +44,7 @@ function App() {
           },
         }}
       />
-      <ReactQueryDevtools initialIsOpen='true' />
+      <ReactQueryDevtools />
       <BrowserRouter>
         <Routes>
           <Route
