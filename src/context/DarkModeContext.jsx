@@ -13,7 +13,7 @@ function DarkModeProvider({ children }) {
   }
 
   return (
-    <DarkModeContext.Provider value={(isDarkMode, toggleDarkMode)}>
+    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
       {children}
     </DarkModeContext.Provider>
   );
