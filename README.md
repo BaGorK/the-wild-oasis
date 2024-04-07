@@ -1,8 +1,13 @@
-# React + Vite
+# The wild oasis
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+`REACT + VITE`
 
-Currently, two official plugins are available:
+`React Query + supabase`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About
+
+> The wild oasis is an admin dashboard for an ideal hotel company that allows managers to create, update, and delete bookings, review checkins outs and unconfirmed bookings.
+> On the dashboard the managers can see todays activities, summary of total sales, and also can perform checkin and checkout guests.
+> I made this project by taking a complete react bootcamp `the ultimate react course`. and this is a main project of that bootcamp.
+
+> it is live on [the wild oasis](https://the-wild-oasis-pro.vercel.app/)
