@@ -12,4 +12,4 @@
 >
 > it is live on [the wild oasis](https://the-wild-oasis-pro.vercel.app/)
 
-<video width="100%" height="300" src="src/assets/the-wild-oasis.webm"></video>
+[the-wild-oasis.webm](https://github.com/BaGorK/the-wild-oasis/assets/121786586/f5514aec-f286-4ec6-b286-28c5f00f3128)
