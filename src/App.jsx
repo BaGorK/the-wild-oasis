@@ -27,7 +27,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <GlobalStyles />
         <Toaster
-          possition='top-center'
+          position='top-center'
           gutter={12}
           containerStyle={{ margin: '8px' }}
           toastOptions={{

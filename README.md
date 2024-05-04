@@ -1,8 +1,6 @@
 # The wild oasis
 
-`REACT + VITE`
-
-`React Query + supabase`
+> React + VITE | React Query For Remote State Management | React Router | supabase As Backend | user authentication | CRUD operation | and also as Database
 
 ## About
 
